@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>台積電：低調卻支撐世界運轉的核心引擎</title>
+  <meta name="description" content="台積電長文解析：產業、工程、時代意義。" />
+
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --bg2:#0e1524;
+      --card:#0f1a2f;
+      --text:#e9eef8;
+      --muted:#a8b3c7;
+      --line: rgba(255,255,255,.10);
+      --brand:#7aa7ff;
+      --brand2:#6ee7ff;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+              "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+    }
+    [data-theme="light"]{
+      --bg:#f7f8fb;
+      --bg2:#eef2f9;
+      --card:#ffffff;
+      --text:#0b1324;
+      --muted:#4b5568;
+      --line: rgba(15,23,42,.12);
+      --brand:#2563eb;
+      --brand2:#0891b2;
+      --shadow: 0 18px 60px rgba(2, 6, 23, .10);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(122,167,255,.25), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(110,231,255,.18), transparent 55%),
+                  linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      line-height:1.75;
+    }
+    a{color:inherit}
+    .progress{
+      position:fixed; inset:0 0 auto 0;
+      height:4px; background:transparent;
+      z-index:9999;
+    }
+    .progress > div{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 18px rgba(122,167,255,.55);
+      transform-origin:left;
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--bg) 70%, transparent);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 12px 26px rgba(122,167,255,.25);
+    }
+    .brand strong{font-weight:800; letter-spacing:.3px}
+    .brand span{color:var(--muted); font-size:13px}
+
+    .actions{display:flex; gap:10px; align-items:center}
+    .btn{
+      border:1px solid var(--line);
+      background: color-mix(in oklab, var(--card) 75%, transparent);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: color-mix(in oklab, var(--brand) 35%, var(--line));}
+    .btn:active{transform: translateY(0px) scale(.99);}
+    .btn small{color:var(--muted); font-weight:600}
+
+    header.hero{
+      max-width:var(--max);
+      margin:22px auto 0;
+      padding:0 18px;
+    }
+    .hero-card{
+      border:1px solid var(--line);
+      border-radius: calc(var(--radius) + 10px);
+      overflow:hidden;
+      background: color-mix(in oklab, var(--card) 92%, transparent);
+      box-shadow: var(--shadow);
+    }
+    .hero-media{
+      position:relative;
+      height: 360px;
+      background:#111827;
+    }
+    .hero-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .hero-media::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.40) 65%, rgba(0,0,0,.70) 100%);
+      pointer-events:none;
+    }
+    .hero-badges{
+      position:absolute; top:16px; left:16px; display:flex; gap:10px; flex-wrap:wrap;
+      z-index:2;
+    }
+    .badge{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.30);
+      backdrop-filter: blur(8px);
+      color: rgba(255,255,255,.90);
+    }
+    .hero-content{
+      padding:18px 18px 20px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:start;
+    }
+    h1{
+      margin:0 0 8px;
+      font-size: clamp(24px, 4vw, 42px);
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size: 15px;
+    }
+    .meta{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:14px 14px;
+      background: color-mix(in oklab, var(--bg) 40%, var(--card));
+    }
+    .meta-row{
+      display:flex; justify-content:space-between; gap:10px;
+      font-size:13px;
+      color:var(--muted);
+      padding:6px 0;
+      border-bottom:1px dashed color-mix(in oklab, var(--line) 70%, transparent);
+    }
+    .meta-row:last-child{border-bottom:none}
+    .meta-row b{color:var(--text); font-weight:700}
+
+    main{
+      max-width:var(--max);
+      margin:18px auto 80px;
+      padding:0 18px;
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    nav.toc{
+      position:sticky;
+      top:70px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--card) 92%, transparent);
+      box-shadow: 0 12px 44px rgba(0,0,0,.16);
+      overflow:hidden;
+    }
+    .toc-head{
+      padding:14px 14px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .toc-head strong{font-size:14px}
+    .toc-body{padding:10px 8px 12px}
+    .toc a{
+      display:block;
+      text-decoration:none;
+      padding:10px 10px;
+      border-radius:12px;
+      color:var(--muted);
+      font-size:14px;
+      transition: background .12s ease, color .12s ease;
+    }
+    .toc a:hover{
+      background: color-mix(in oklab, var(--brand) 12%, transparent);
+      color: var(--text);
+    }
+    .toc a.active{
+      background: color-mix(in oklab, var(--brand) 18%, transparent);
+      color: var(--text);
+      border: 1px solid color-mix(in oklab, var(--brand) 35%, var(--line));
+      margin: 4px 6px;
+    }
+
+    article{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--card) 92%, transparent);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .article-inner{padding:18px 18px 24px}
+    .kicker{
+      font-weight:800;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+      font-size:12px;
+      color: color-mix(in oklab, var(--brand) 80%, var(--muted));
+    }
+    h2{
+      margin:22px 0 10px;
+      font-size: 22px;
+      line-height:1.3;
+      padding-top:6px;
+    }
+    p{margin:10px 0}
+    .quote{
+      margin:16px 0;
+      padding:14px 14px;
+      border-left:4px solid color-mix(in oklab, var(--brand) 70%, var(--brand2));
+      background: color-mix(in oklab, var(--brand) 10%, transparent);
+      border-radius: 14px;
+      color: color-mix(in oklab, var(--text) 92%, white);
+      font-weight:650;
+    }
+
+    .media-row{
+      margin:16px 0 10px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    figure{
+      margin:0;
+      border:1px solid var(--line);
+      border-radius: 16px;
+      overflow:hidden;
+      background: color-mix(in oklab, var(--bg) 35%, var(--card));
+    }
+    figure img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+    }
+    figcaption{
+      padding:10px 12px;
+      font-size:12px;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+    }
+
+    .footer{
+      margin-top:22px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+      color:var(--muted);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .fab{
+      position:fixed;
+      right:16px; bottom:16px;
+      display:flex; flex-direction:column; gap:10px;
+      z-index:99;
+    }
+
+    @media (max-width: 980px){
+      .hero-content{grid-template-columns:1fr}
+      main{grid-template-columns: 1fr}
+      nav.toc{position:relative; top:auto}
+      .media-row{grid-template-columns:1fr}
+      .hero-media{height: 300px;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>台積電長文頁</strong><br />
+          <span>產業 × 工程 × 時代意義</span>
+        </div>
+      </a>
+
+      <div class="actions">
+        <button class="btn" id="copyLink" title="複製當前章節連結">
+          🔗 <small>複製連結</small>
+        </button>
+        <button class="btn" id="toggleTheme" title="切換深/淺色">
+          🌓 <small>切換主題</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <a id="top"></a>
+
+  <header class="hero">
+    <div class="hero-card">
+      <div class="hero-media">
+        <div class="hero-badges">
+          <span class="badge">Longform</span>
+          <span class="badge">RWD</span>
+          <span class="badge">TOC / Progress</span>
+          <span class="badge">Dark / Light</span>
+        </div>
+
+        <!-- HERO 圖片：每 6 秒輪播一次 -->
+        <img id="heroImg"
+          src="https://images.openai.com/static-rsc-3/dDbjapwlImkKoDHm30NZQ-d7ef_6PAbzP80xrSX7gDaik69Jl3SXcF7PXN8ZuCpRWp7LwIPTtLeyPf78-nhkwn6OTfLiaByqkOysj1_NkeI?purpose=fullsize&v=1"
+          alt="TSMC related image" />
+      </div>
+
+      <div class="hero-content">
+        <div>
+          <div class="kicker">台積電：低調卻支撐世界運轉的核心引擎</div>
+          <h1>把不可能變成量產，把理論推進成現實</h1>
+          <p class="subtitle">
+            這是一篇偏「產業＋工程＋時代意義」的長文頁面範本：適合當作報告展示、專題網站、或長文章作品集。
+          </p>
+        </div>
+
+        <div class="meta">
+          <div class="meta-row"><span>閱讀形式</span><b>長文章節</b></div>
+          <div class="meta-row"><span>功能</span><b>目錄 / 進度 / 主題切換</b></div>
+          <div class="meta-row"><span>建議用途</span><b>專題、作品集、課堂報告</b></div>
+          <div class="meta-row"><span>檔案</span><b>單檔 HTML</b></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="toc" aria-label="文章目錄">
+      <div class="toc-head">
+        <strong>目錄</strong>
+        <span style="color:var(--muted); font-size:12px;">可點選跳轉</span>
+      </div>
+      <div class="toc-body" id="toc">
+        <a href="#sec0">台積電：核心引擎</a>
+        <a href="#sec1">一、商業模式</a>
+        <a href="#sec2">二、工程文化</a>
+        <a href="#sec3">三、系統工程</a>
+        <a href="#sec4">四、結構性影響</a>
+        <a href="#sec5">五、地緣政治</a>
+        <a href="#sec6">六、低調重要</a>
+        <a href="#sec7">結語</a>
+      </div>
+    </nav>
+
+    <article>
+      <div class="article-inner">
+        <p class="kicker">全文</p>
+
+        <section id="sec0">
+          <h2>台積電：低調卻支撐世界運轉的核心引擎</h2>
+          <p>
+            在多數人眼中，科技產業的明星往往是看得見、摸得著的終端產品：手機、電腦、顯示卡、AI 伺服器，甚至自動駕駛與太空科技。
+            然而，在這些耀眼產品的背後，真正決定性能上限、能耗效率與技術世代差距的，並不是外殼設計或行銷話術，而是晶片。
+            而在全球晶片製造這個極端高門檻、資本密集、技術密度最高的產業中，台積電幾乎已經成為一個無可取代的存在。
+          </p>
+          <p>
+            它不像消費品牌那樣追求曝光，也不需要吸引一般消費者的注意；它存在的方式，更像是基礎設施——當它穩定運作時，世界不會特別注意；
+            但一旦出現問題，整個科技產業都會感到震動。這種角色，正是台積電最貼切的定位。
+          </p>
+          <div class="quote">
+            台積電不是站在舞台中央的主角，而是讓整個舞台不會坍塌的結構。
+          </div>
+        </section>
+
+        <div class="media-row" aria-label="圖片區塊">
+          <figure>
+            <img
+              src="https://spectrum.ieee.org/media-library/less-than-p-greater-than-tsmcs-manufacturing-facility-in-phoenix-will-produce-advanced-chips-using-4-nanometer-technology-less-than-p-greater-than.jpg?id=55368693"
+              alt="TSMC fab facility image">
+            <figcaption>配圖：晶圓廠與製造現場（示意）。</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/i7yftgLyNyzawHNDnE42nd.jpg"
+              alt="TSMC chip / wafer image">
+            <figcaption>配圖：先進製程與晶片（示意）。</figcaption>
+          </figure>
+        </div>
+
+        <section id="sec1">
+          <h2>一、專注到近乎偏執的商業模式</h2>
+          <p>
+            台積電最早、也是最關鍵的選擇，就是<strong>專注於純晶圓代工</strong>。
+            不做自有品牌、不設計終端產品、不與客戶競爭，這在半導體產業發展初期其實是一條風險極高的路。
+            因為這代表公司把所有資源押在製程能力、設備投資與客戶信任之上，任何一次技術世代落後，都可能是致命打擊。
+          </p>
+          <p>
+            但正是這種「不分心」的策略，讓台積電可以把所有工程、人力、資本、管理流程，都集中在同一件事上：
+            <strong>如何把電晶體做得更小、更快、更省電，而且能穩定大量生產</strong>。
+          </p>
+          <p>
+            這不是實驗室成就，而是工業能力。半導體製程的難度不在於「能不能做出來一次」，而在於「能不能每天做出幾十萬片、幾百萬顆，而且良率一致」。
+            台積電真正的護城河，不是某一代製程節點，而是它把「複雜到極限的技術」轉化為「可預測、可複製、可交付」的能力。
+          </p>
+        </section>
+
+        <section id="sec2">
+          <h2>二、工程文化：紀律、細節與長期主義</h2>
+          <p>
+            如果用工程師的語言來形容台積電，它更像是一部精密到近乎冷酷的機器。
+            這家公司最核心的文化，不是創意奔放，而是<strong>紀律、標準與執行力</strong>。
+          </p>
+          <p>
+            在台積電的世界裡，任何一個參數異常、任何一條製程曲線偏移、任何一個設備狀態變化，都不是小事。
+            這種文化，對外人來說可能顯得保守甚至壓抑，但對半導體製造而言，卻是唯一可行的道路。
+            因為先進製程的世界，本來就不允許浪漫主義。
+          </p>
+          <p>
+            更關鍵的是，台積電的工程文化是<strong>長期主義</strong>。
+            它不是為了短期財報去壓縮投資，而是提前數年就為下一個製程世代準備設備、廠房、人才與供應鏈。
+            這意味著在技術還沒真正賺錢之前，就必須先承擔巨大的資本支出與風險。
+          </p>
+          <p>
+            這種「先承擔、後回報」的策略，讓競爭者很難跟上。因為不是每家公司，都有足夠的耐心與財務結構，去支持這種長週期投資。
+          </p>
+        </section>
+
+        <section id="sec3">
+          <h2>三、製程不是數字，而是系統工程</h2>
+          <p>
+            外界談論台積電時，常會簡化成「幾奈米領先幾年」。
+            但對真正理解製程的人來說，節點名稱只是標籤，真正的差距在於<strong>整個系統工程的成熟度</strong>。
+          </p>
+          <p>
+            先進製程牽涉到的不是單一技術，而是光刻、材料、化學、熱處理、量測、設備整合、軟體控制、良率管理的全面協同。
+            任何一個環節落後，都會讓整條產線失去意義。
+          </p>
+          <p>
+            台積電真正可怕的地方，在於它能把這些極度複雜的環節整合成一條穩定運作的生產線，而且每一代都能如期交付。
+            這不只是技術實力，更是組織能力、流程管理與供應鏈整合的成果。
+          </p>
+        </section>
+
+        <section id="sec4">
+          <h2>四、對全球科技產業的結構性影響</h2>
+          <p>
+            從智慧型手機到高效能運算，從雲端資料中心到人工智慧模型訓練，當代科技發展幾乎都與台積電高度耦合。
+            它不是某一家公司，而是<strong>全球科技創新的放大器</strong>。
+          </p>
+          <p>
+            對客戶而言，台積電的存在降低了創新門檻。公司不需要自己投資數百億美元蓋晶圓廠，就能設計最先進的晶片。
+            這讓小型新創也有機會在頂級製程上競爭，推動整個產業的多樣性與速度。
+          </p>
+          <p>
+            對整個世界而言，台積電讓科技進步不再只掌握在少數垂直整合巨頭手中，而是形成一個更開放、但同時高度集中於製造能力的產業結構。
+          </p>
+        </section>
+
+        <section id="sec5">
+          <h2>五、地緣政治下的關鍵節點</h2>
+          <p>
+            當科技與國際政治交織，台積電的角色早已超越一家企業。
+            它所在的位置，使它成為全球供應鏈的戰略節點。先進製程不只是商業競爭力，更是國家安全、產業自主與科技主權的核心。
+          </p>
+          <p>
+            這也讓台積電承受的壓力，遠超一般企業。它必須在高度政治化的環境中，維持技術中立與商業理性，同時確保供應鏈穩定與營運安全。
+            這種平衡，本身就是一項極高難度的管理挑戰。
+          </p>
+        </section>
+
+        <section id="sec6">
+          <h2>六、低調但極端重要的存在</h2>
+          <p>
+            台積電很少出現在一般人的日常對話裡，但它卻深深嵌入每個人的生活。
+            你不需要知道它的產品型號，也不會因為它而排隊購買，但你每天使用的科技，幾乎都與它有關。
+          </p>
+          <p>
+            如果說有些公司改變了人們的生活方式，那麼台積電改變的是<strong>科技進步的節奏與可能性本身</strong>。
+            它不負責告訴你未來長什麼樣子，但它確保那個未來在物理上是可行的。
+          </p>
+        </section>
+
+        <section id="sec7">
+          <h2>結語：像空氣一樣的巨人</h2>
+          <p>
+            最精準的形容或許是這樣的：台積電不是站在舞台中央的主角，而是讓整個舞台不會坍塌的結構。
+            它低調、嚴謹、冷靜，卻承載著全球科技最炙熱的野心。
+          </p>
+          <p>
+            當世界追逐更快的運算、更智慧的機器、更複雜的模型時，台積電就在背後，默默把不可能變成可量產，把理論推進成現實。
+            如果未來科技是一座高樓，那台積電，毫無疑問，是最深、最穩、也最難被取代的地基。
+          </p>
+
+          <div class="footer">
+            <div>頁面功能：目錄跳轉、章節高亮、閱讀進度、回到頂端、深淺色切換</div>
+            <div>© 你的文章展示頁（可自行改成專題/作品集）</div>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <div class="fab" aria-label="快速操作">
+    <button class="btn" id="toTop" title="回到頂端">⬆️ <small>頂端</small></button>
+  </div>
+
+  <script>
+    // ====== 1) Hero 輪播（可自行換成你下載的本機圖） ======
+    const heroImgs = [
+      "https://images.openai.com/static-rsc-3/dDbjapwlImkKoDHm30NZQ-d7ef_6PAbzP80xrSX7gDaik69Jl3SXcF7PXN8ZuCpRWp7LwIPTtLeyPf78-nhkwn6OTfLiaByqkOysj1_NkeI?purpose=fullsize&v=1",
+      "https://spectrum.ieee.org/media-library/less-than-p-greater-than-tsmcs-manufacturing-facility-in-phoenix-will-produce-advanced-chips-using-4-nanometer-technology-less-than-p-greater-than.jpg?id=55368693",
+      "https://cdn.mos.cms.futurecdn.net/i7yftgLyNyzawHNDnE42nd.jpg"
+    ];
+    let heroIndex = 0;
+    const heroEl = document.getElementById("heroImg");
+    setInterval(() => {
+      heroIndex = (heroIndex + 1) % heroImgs.length;
+      heroEl.src = heroImgs[heroIndex];
+    }, 6000);
+
+    // ====== 2) 閱讀進度條 ======
+    const bar = document.getElementById("progressBar");
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      bar.style.width = pct.toFixed(2) + "%";
+    }
+    window.addEventListener("scroll", updateProgress, {passive:true});
+    updateProgress();
+
+    // ====== 3) TOC 章節高亮（scrollspy） ======
+    const tocLinks = Array.from(document.querySelectorAll("#toc a"));
+    const sections = tocLinks.map(a => document.querySelector(a.getAttribute("href")));
+
+    const io = new IntersectionObserver((entries) => {
+      // 找到可視比例最高的 section
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if(!visible) return;
+
+      tocLinks.forEach(a => a.classList.remove("active"));
+      const id = "#" + visible.target.id;
+      const active = tocLinks.find(a => a.getAttribute("href") === id);
+      if(active) active.classList.add("active");
+    }, { rootMargin: "-20% 0px -70% 0px", threshold: [0.1, 0.2, 0.35, 0.5, 0.7] });
+
+    sections.forEach(sec => sec && io.observe(sec));
+
+    // ====== 4) 回到頂端 ======
+    document.getElementById("toTop").addEventListener("click", () => {
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    // ====== 5) 深淺色主題切換（localStorage 記住） ======
+    const key = "tsmc-theme";
+    const saved = localStorage.getItem(key);
+    if(saved) document.documentElement.setAttribute("data-theme", saved);
+
+    document.getElementById("toggleTheme").addEventListener("click", () => {
+      const cur = document.documentElement.getAttribute("data-theme");
+      const next = cur === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem(key, next);
+    });
+
+    // ====== 6) 複製當前章節連結 ======
+    document.getElementById("copyLink").addEventListener("click", async () => {
+      const hash = location.hash || "#top";
+      const url = location.origin ? (location.origin + location.pathname + hash) : (location.href);
+      try{
+        await navigator.clipboard.writeText(url);
+        alert("已複製連結：\\n" + url);
+      }catch(e){
+        // fallback
+        prompt("複製這段連結：", url);
+      }
+    });
+  </script>
+</body>
+</html>
